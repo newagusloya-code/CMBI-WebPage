@@ -1,0 +1,349 @@
+---
+import Layout from "../layouts/Layout.astro"
+import MotionRevealScript from "../components/MotionRevealScript.astro"
+import SiteFooter from "../components/SiteFooter.astro"
+import SiteHeader from "../components/SiteHeader.astro"
+import {
+  benefitCards,
+  dashboardMetrics,
+  galleryItems,
+  serviceCards,
+  servicePages,
+  settings,
+  siteConfig,
+  testimonials,
+} from "../data/site"
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "HealthAndBeautyBusiness",
+  name: siteConfig.fullName,
+  alternateName: siteConfig.name,
+  description: siteConfig.description,
+  image: settings.images.hero,
+  areaServed: "Ensenada, Baja California, México",
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Calle De Las Redes",
+    addressLocality: "Ensenada",
+    addressRegion: "Baja California",
+    addressCountry: "MX",
+  },
+  sameAs: [settings.socialLinks.instagram, settings.socialLinks.facebook],
+}
+---
+
+<Layout title={siteConfig.title} description={siteConfig.description}>
+  <main class="site-shell" id="contenido">
+    <SiteHeader />
+
+    <section class="hero" id="inicio">
+      <div class="hero-surface">
+        <img
+          class="hero-image"
+          src={settings.images.hero}
+          alt="Recepción luminosa de CMBI con área de espera, consultorio y alberca al fondo."
+          fetchpriority="high"
+        />
+        <div class="hero-gradient"></div>
+      </div>
+
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <p class="eyebrow">Bienestar integral en Ensenada</p>
+          <h1>Cuidado médico, belleza y movimiento en un espacio sereno.</h1>
+          <p class="hero-lead">
+            CMBI reúne nutrición, spa, gym, alberca techada y terapias de bienestar
+            en una experiencia clara, cálida y profesional.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href={siteConfig.reserveHref} target="_blank" rel="noreferrer">Agendar por WhatsApp</a>
+            <a class="button button-secondary" href={siteConfig.consultHref}>Ver servicios</a>
+            <a class="button button-ghost" href={siteConfig.experienceHref}>Conocer espacios</a>
+          </div>
+          <div class="badge-row" aria-label="Pilares de CMBI">
+            {siteConfig.heroBadges.map((badge) => <span>{badge}</span>)}
+          </div>
+        </div>
+
+        <aside class="hero-panel reveal" aria-label="Resumen de atención CMBI">
+          <div class="panel-card">
+            <p class="panel-eyebrow">Atención por intención</p>
+            <ul>
+              <li>Primero entendemos tu objetivo: salud, relajación, movimiento o estética.</li>
+              <li>Después te dirigimos al área adecuada sin saturarte de información.</li>
+              <li>La agenda por WhatsApp usa mensajes prellenados según el servicio.</li>
+            </ul>
+          </div>
+
+          <div class="panel-stats">
+            {siteConfig.heroStats.map((stat) => (
+              <article>
+                <strong>{stat.value}</strong>
+                <span>{stat.label}</span>
+              </article>
+            ))}
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section analysis-section" id="analisis">
+      <div class="container split-grid">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Ruta de atención</p>
+          <h2>Menos catálogo, más dirección: cada visita inicia con una intención.</h2>
+          <p>
+            CMBI organiza sus áreas para que puedas elegir con calma: salud, relajación,
+            movimiento, belleza o bienestar integral. La experiencia prioriza claridad,
+            espacios serenos y orientación humana.
+          </p>
+        </div>
+        <div class="quote-panel reveal">
+          <blockquote>
+            Un espacio donde la atención profesional, el descanso y el cuidado personal
+            se encuentran sin ruido ni prisa.
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="servicios">
+      <div class="container">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Áreas integrales de bienestar</p>
+          <h2>Servicios agrupados para encontrar rápido lo que necesitas.</h2>
+          <p>
+            Cada área tiene una explicación breve y una acción directa para iniciar la
+            conversación adecuada por WhatsApp.
+          </p>
+        </div>
+
+        <div class="program-grid">
+          {serviceCards.map((card) => (
+            <article class="program-card reveal" id={card.id}>
+              <div class="card-media">
+                <img src={card.image} alt={card.alt} loading="lazy" />
+              </div>
+              <div class="card-copy">
+                <p class="card-eyebrow">{card.eyebrow}</p>
+                <h3>{card.title}</h3>
+                <p>{card.copy}</p>
+                <a href={card.href}>{card.cta}</a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section benefits-section" id="beneficios">
+      <div class="container">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Beneficios rápidos</p>
+          <h2>Comunicación breve para decidir sin esfuerzo.</h2>
+        </div>
+        <div class="benefit-grid">
+          {benefitCards.map((item) => (
+            <article class="mini-card reveal">
+              <h3>{item.title}</h3>
+              <p>{item.copy}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section destination-section" id="instalaciones">
+      <div class="container">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Instalaciones</p>
+          <h2>Galería visual sin fondos dinámicos ni movimiento brusco.</h2>
+          <p>
+            Las imágenes funcionan como evidencia: recepción, alberca, gym y spa.
+            Los captions aparecen con fade sutil para mantener calma visual.
+          </p>
+        </div>
+
+        <div class="gallery-grid">
+          {galleryItems.map((item) => (
+            <figure class="gallery-card reveal">
+              <img src={item.image} alt={item.alt} loading="lazy" />
+              <figcaption>{item.caption}</figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section evidence-section" id="testimonios">
+      <div class="container evidence-grid">
+        <div class="evidence-copy reveal">
+          <p class="eyebrow">Testimonios</p>
+          <h2>Señales de confianza para elegir con tranquilidad.</h2>
+          <p>
+            CMBI comunica desde la claridad: acompañamiento cercano, objetivos definidos
+            y una experiencia que evita promesas exageradas.
+          </p>
+        </div>
+
+        <div class="evidence-list">
+          {testimonials.map((item) => (
+            <article class="reveal">
+              <p class="card-eyebrow">{item.label}</p>
+              <p>{item.quote}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section dashboard-section" id="panel">
+      <div class="container dashboard-grid">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Panel de bienestar</p>
+          <h2>Una vista clara para ordenar servicios, citas y seguimiento.</h2>
+          <p>
+            La experiencia digital puede evolucionar hacia un panel simple para
+            consultar servicios activos, solicitudes por WhatsApp y próximos pasos.
+          </p>
+        </div>
+        <div class="dashboard-panel reveal" aria-label="Vista previa de dashboard CMBI">
+          <div class="dashboard-topline">
+            <span>Vista CMBI</span>
+            <strong>Semana activa</strong>
+          </div>
+          <div class="metric-grid">
+            {dashboardMetrics.map((metric) => (
+              <article>
+                <span>{metric.label}</span>
+                <strong>{metric.value}</strong>
+                <p>{metric.detail}</p>
+              </article>
+            ))}
+          </div>
+          <div class="dashboard-bars" aria-hidden="true">
+            <span style="--bar: 78%"></span>
+            <span style="--bar: 52%"></span>
+            <span style="--bar: 66%"></span>
+            <span style="--bar: 44%"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section about-section" id="ubicacion">
+      <div class="container split-grid">
+        <div class="split-copy reveal">
+          <p class="eyebrow">Sobre CMBI + ubicación</p>
+          <h2>Un centro integral ubicado en la zona costera de Ensenada.</h2>
+          <p>
+            CMBI comunica una promesa sencilla: acompañar a las personas desde una
+            mirada integral, con espacios cuidados, servicios complementarios y una
+            agenda fácil de iniciar por conversación.
+          </p>
+          <p>
+            El mapa ayuda a decidir rápido si la visita es práctica antes de escribir
+            por WhatsApp o elegir un servicio.
+          </p>
+          <div class="check-grid">
+            <span>Zona costera</span>
+            <span>Agenda por WhatsApp</span>
+            <span>Alberca techada</span>
+            <span>Spa + gym</span>
+          </div>
+        </div>
+        <img class="map-image reveal" src={settings.images.map} alt="Mapa de ubicación aproximada de CMBI en la zona costera de Ensenada." loading="lazy" />
+      </div>
+    </section>
+
+    <section class="section contact-section" id="contacto">
+      <div class="container contact-grid">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Agenda por WhatsApp</p>
+          <h2>Empieza por una conversación breve y bien dirigida.</h2>
+          <p>{siteConfig.contactBlock.copy}</p>
+        </div>
+
+        <div class="contact-panel reveal">
+          <p class="card-eyebrow">{siteConfig.contactBlock.heading}</p>
+          <p>{siteConfig.contactBlock.note}</p>
+          <div class="contact-actions">
+            <a class="button button-primary" href={siteConfig.reserveHref} target="_blank" rel="noreferrer">Agendar cita</a>
+            {servicePages.slice(0, 4).map((service) => (
+              <a class="button button-secondary" href={`/servicios/${service.slug}`}>{service.shortTitle}</a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <SiteFooter />
+
+    <div class="cookie-banner" data-cookie-banner role="region" aria-label="Preferencias de cookies">
+      <div class="cookie-copy">
+        <p class="card-eyebrow">Cookies</p>
+        <h3>{siteConfig.cookie.title}</h3>
+        <p>{siteConfig.cookie.body}</p>
+      </div>
+
+      <div class="cookie-actions">
+        <button class="button button-primary" type="button" data-cookie-accept>{siteConfig.cookie.primary}</button>
+        <button class="button button-secondary" type="button" data-cookie-minimal>{siteConfig.cookie.secondary}</button>
+        <button class="button button-ghost" type="button" data-cookie-preferences>{siteConfig.cookie.tertiary}</button>
+      </div>
+    </div>
+
+    <button class="cookie-toggle" type="button" data-cookie-toggle hidden>Cookies</button>
+  </main>
+
+  <script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
+  <script>
+    const storageKey = "cmbi-cookie-consent";
+    const banner = document.querySelector("[data-cookie-banner]");
+    const toggle = document.querySelector("[data-cookie-toggle]");
+    const accept = document.querySelector("[data-cookie-accept]");
+    const minimal = document.querySelector("[data-cookie-minimal]");
+    const preferences = document.querySelector("[data-cookie-preferences]");
+
+    const setConsent = (value) => {
+      try {
+        window.localStorage.setItem(storageKey, value);
+      } catch {}
+      if (banner) {
+        banner.setAttribute("data-state", value);
+        banner.hidden = true;
+      }
+      if (toggle) toggle.hidden = false;
+    };
+
+    const savedConsent = (() => {
+      try {
+        return window.localStorage.getItem(storageKey);
+      } catch {
+        return null;
+      }
+    })();
+
+    if (savedConsent) {
+      banner?.setAttribute("data-state", savedConsent);
+      if (banner) banner.hidden = true;
+      if (toggle) toggle.hidden = false;
+    } else {
+      banner?.setAttribute("data-state", "open");
+      if (toggle) toggle.hidden = true;
+    }
+
+    accept?.addEventListener("click", () => setConsent("accepted"));
+    minimal?.addEventListener("click", () => setConsent("necessary"));
+    preferences?.addEventListener("click", () => setConsent("preferences"));
+    toggle?.addEventListener("click", () => {
+      if (!banner) return;
+      banner.hidden = false;
+      banner.setAttribute("data-state", "open");
+      toggle.hidden = true;
+    });
+
+  </script>
+  <MotionRevealScript />
+</Layout>

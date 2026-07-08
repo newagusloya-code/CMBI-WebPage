@@ -1,0 +1,24 @@
+---
+import { footerLinks, settings, siteConfig } from "../data/site"
+---
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <img class="footer-logo" src={settings.images.logo} alt="Logo de CMBI" loading="lazy" />
+      <p>{siteConfig.footer.copy}</p>
+      <p>{siteConfig.footer.note}</p>
+    </div>
+
+    <div>
+      <h3>Legal</h3>
+      {footerLinks.map((link) => <a href={link.href}>{link.label}</a>)}
+    </div>
+
+    <div>
+      <h3>Contacto</h3>
+      <p>{siteConfig.location}</p>
+      <a href={siteConfig.reserveHref} target="_blank" rel="noreferrer">WhatsApp CMBI</a>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,22 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { siteConfig } from "../data/site";
+---
+
+<Layout title={`Cookies | ${siteConfig.name}`} description="Preferencias de cookies de CMBI Centro Médico de Bienestar Integral.">
+  <main class="section">
+    <div class="container section-heading">
+      <p class="eyebrow">Cookies</p>
+      <h1>Preferencias de cookies</h1>
+      <p>
+        Este sitio usa cookies necesarias para recordar preferencias básicas, como el
+        consentimiento de cookies y el modo de movimiento de la interfaz.
+      </p>
+      <p>
+        El banner permite aceptar, limitar o revisar la configuración sin abandonar la
+        página.
+      </p>
+      <a class="button button-secondary" href="/">Volver al inicio</a>
+    </div>
+  </main>
+</Layout>

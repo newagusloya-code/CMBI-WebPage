@@ -1,0 +1,28 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { siteConfig } from "../data/site";
+---
+
+<Layout title={`Aviso legal | ${siteConfig.name}`} description="Aviso legal de CMBI Centro Médico de Bienestar Integral.">
+  <main class="section">
+    <div class="container section-heading">
+      <p class="eyebrow">Aviso legal</p>
+      <h1>Información legal y sanitaria responsable</h1>
+      <p>
+        La información publicada en este sitio tiene fines informativos y de orientación.
+        No sustituye una valoración médica, nutricional, terapéutica o estética
+        personalizada.
+      </p>
+      <p>
+        Cualquier servicio, tratamiento o programa debe entenderse como sujeto a
+        valoración, disponibilidad y pertinencia según cada caso.
+      </p>
+      <p>
+        Los enlaces de contacto facilitan el primer acercamiento por WhatsApp, pero no
+        deben utilizarse para compartir expedientes, diagnósticos o datos sensibles sin
+        indicación expresa.
+      </p>
+      <a class="button button-secondary" href="/">Volver al inicio</a>
+    </div>
+  </main>
+</Layout>

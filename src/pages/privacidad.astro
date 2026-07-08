@@ -1,0 +1,26 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { siteConfig } from "../data/site";
+---
+
+<Layout title={`Privacidad | ${siteConfig.name}`} description="Aviso de privacidad de CMBI Centro Médico de Bienestar Integral.">
+  <main class="section">
+    <div class="container section-heading">
+      <p class="eyebrow">Privacidad</p>
+      <h1>Privacidad y contacto responsable</h1>
+      <p>
+        CMBI no solicita diagnósticos ni datos médicos sensibles mediante formularios
+        abiertos en este sitio.
+      </p>
+      <p>
+        Si usas los enlaces de WhatsApp, evita compartir información clínica sensible
+        hasta recibir indicaciones directas del equipo por el canal correspondiente.
+      </p>
+      <p>
+        Las preferencias de cookies se guardan localmente en el navegador para mejorar
+        la experiencia de navegación.
+      </p>
+      <a class="button button-secondary" href="/">Volver al inicio</a>
+    </div>
+  </main>
+</Layout>

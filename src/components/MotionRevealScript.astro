@@ -1,0 +1,48 @@
+<script>
+  const motionKey = "cmbi-motion";
+  const motionToggle = document.querySelector("[data-motion-toggle]");
+
+  const setMotion = (value) => {
+    document.documentElement.dataset.motion = value;
+    motionToggle?.setAttribute("aria-pressed", value === "reduced" ? "true" : "false");
+    if (motionToggle) {
+      motionToggle.textContent = value === "reduced" ? "Movimiento instantáneo" : "Movimiento suave";
+    }
+    try {
+      window.localStorage.setItem(motionKey, value);
+    } catch {}
+  };
+
+  const initialMotion = (() => {
+    try {
+      return window.localStorage.getItem(motionKey);
+    } catch {
+      return null;
+    }
+  })();
+
+  if (initialMotion) {
+    setMotion(initialMotion);
+  } else if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    setMotion("reduced");
+  }
+
+  motionToggle?.addEventListener("click", () => {
+    const current = document.documentElement.dataset.motion === "reduced" ? "smooth" : "reduced";
+    setMotion(current);
+  });
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.setAttribute("data-visible", "true");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.16 }
+  );
+
+  document.querySelectorAll(".reveal").forEach((element) => observer.observe(element));
+</script>

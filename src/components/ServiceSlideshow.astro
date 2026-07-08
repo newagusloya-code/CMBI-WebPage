@@ -1,0 +1,83 @@
+---
+interface Slide {
+  title: string
+  copy: string
+  illustration: string
+}
+
+interface Props {
+  slides: readonly Slide[]
+  label: string
+}
+
+const { slides, label } = Astro.props
+---
+
+<section class="service-slideshow reveal" data-slideshow aria-label={`Ilustraciones de ${label}`}>
+  <div class="slideshow-stage">
+    {slides.map((slide, index) => (
+      <article class="service-slide" data-slide hidden={index !== 0}>
+        <div class={`service-illustration art-${slide.illustration}`} aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="slide-copy">
+          <p class="card-eyebrow">Concepto {String(index + 1).padStart(2, "0")}</p>
+          <h2>{slide.title}</h2>
+          <p>{slide.copy}</p>
+        </div>
+      </article>
+    ))}
+  </div>
+
+  <div class="slideshow-controls">
+    <button type="button" data-slide-prev aria-label="Ver ilustración anterior">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M15 5 8 12l7 7" />
+      </svg>
+    </button>
+    <div class="slide-dots" aria-label="Seleccionar ilustración">
+      {slides.map((slide, index) => (
+        <button
+          type="button"
+          data-slide-dot={index}
+          aria-label={`Ver ${slide.title}`}
+          aria-current={index === 0 ? "true" : "false"}
+        ></button>
+      ))}
+    </div>
+    <button type="button" data-slide-next aria-label="Ver ilustración siguiente">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="m9 5 7 7-7 7" />
+      </svg>
+    </button>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll("[data-slideshow]").forEach((slideshow) => {
+    const slides = Array.from(slideshow.querySelectorAll("[data-slide]"));
+    const dots = Array.from(slideshow.querySelectorAll("[data-slide-dot]"));
+    const previous = slideshow.querySelector("[data-slide-prev]");
+    const next = slideshow.querySelector("[data-slide-next]");
+    let activeIndex = 0;
+
+    const showSlide = (index) => {
+      activeIndex = (index + slides.length) % slides.length;
+      slides.forEach((slide, slideIndex) => {
+        slide.hidden = slideIndex !== activeIndex;
+      });
+      dots.forEach((dot, dotIndex) => {
+        dot.setAttribute("aria-current", dotIndex === activeIndex ? "true" : "false");
+      });
+    };
+
+    previous?.addEventListener("click", () => showSlide(activeIndex - 1));
+    next?.addEventListener("click", () => showSlide(activeIndex + 1));
+    dots.forEach((dot, index) => {
+      dot.addEventListener("click", () => showSlide(index));
+    });
+  });
+</script>

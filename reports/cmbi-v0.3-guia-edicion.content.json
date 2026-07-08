@@ -1,0 +1,206 @@
+[
+  {
+    "type": "h1",
+    "text": "CMBI v0.3 Skeleton de Servicios"
+  },
+  {
+    "type": "body",
+    "text": "Esta guía documenta la plantilla local de CMBI antes de cualquier deploy. La versión prioriza estructura, navegación, páginas internas de servicios, WhatsApp de ejemplo, fondos decorativos suaves y un sistema editable para futuras fases con assets reales."
+  },
+  {
+    "type": "callout",
+    "text": "Estado de publicación: no se ejecutó deploy a Vercel. GitHub queda pendiente hasta recibir la URL del repositorio vacío que creará el usuario."
+  },
+  {
+    "type": "h1",
+    "text": "Cómo Editar Contenido"
+  },
+  {
+    "type": "h2",
+    "text": "src/data/site.ts"
+  },
+  {
+    "type": "body",
+    "text": "Es el centro de control de la plantilla. Aquí se edita el número de WhatsApp, redes sociales, imágenes, navegación, textos globales, beneficios, testimonios, métricas y todos los servicios."
+  },
+  {
+    "type": "bullet",
+    "text": "WHATSAPP_NUMBER usa un número de ejemplo: 520000000000. Sustituirlo solo cuando exista dato real autorizado."
+  },
+  {
+    "type": "bullet",
+    "text": "servicePages controla las páginas /servicios/nutricion, /acuaterapia, /fitness, /spa-belleza y /sauna."
+  },
+  {
+    "type": "bullet",
+    "text": "Para agregar un servicio, duplicar un objeto dentro de servicePages, asignar slug único y completar title, description, slides, idealFor, approach y expectations."
+  },
+  {
+    "type": "bullet",
+    "text": "serviceCards se genera desde servicePages; no hace falta editarlo manualmente salvo que cambie el modelo."
+  },
+  {
+    "type": "h2",
+    "text": "src/pages/index.astro"
+  },
+  {
+    "type": "body",
+    "text": "Es la homepage. La edición aquí debe enfocarse en el orden de secciones, textos introductorios y distribución general. Los servicios se alimentan desde site.ts."
+  },
+  {
+    "type": "bullet",
+    "text": "La sección Servicios ahora manda a páginas internas, no directo a WhatsApp."
+  },
+  {
+    "type": "bullet",
+    "text": "La sección Ubicación usa cmbi-map.png y texto genérico para evitar datos definitivos prematuros."
+  },
+  {
+    "type": "bullet",
+    "text": "Mantener el tono breve, objetivo y sin promesas médicas absolutas."
+  },
+  {
+    "type": "h2",
+    "text": "src/pages/servicios/[slug].astro"
+  },
+  {
+    "type": "body",
+    "text": "Ruta dinámica que genera una página por cada servicio definido en servicePages. No se debe crear una página manual por servicio si el formato sigue siendo el mismo."
+  },
+  {
+    "type": "bullet",
+    "text": "Cada página incluye hero, imagen, bloques de ideal para, enfoque, qué esperar, slideshow, CTA WhatsApp y servicios relacionados."
+  },
+  {
+    "type": "bullet",
+    "text": "El SEO de cada página toma title y description desde el objeto del servicio."
+  },
+  {
+    "type": "bullet",
+    "text": "Los CTAs usan whatsappHref con número de ejemplo hasta futura confirmación."
+  },
+  {
+    "type": "h1",
+    "text": "Componentes Reutilizables"
+  },
+  {
+    "type": "h2",
+    "text": "src/components/SiteHeader.astro"
+  },
+  {
+    "type": "body",
+    "text": "Header compartido con logo, navegación, redes en utility bar, toggle de movimiento y CTA principal. Editar aquí si se modifica navegación global o comportamiento del encabezado."
+  },
+  {
+    "type": "h2",
+    "text": "src/components/SiteFooter.astro"
+  },
+  {
+    "type": "body",
+    "text": "Footer compartido con logo, enlaces legales, ubicación y WhatsApp. Mantener legal y contacto sobrios hasta confirmar datos definitivos."
+  },
+  {
+    "type": "h2",
+    "text": "src/components/ServiceSlideshow.astro"
+  },
+  {
+    "type": "body",
+    "text": "Slideshow manual, sin autoplay. Usa data-slide, botones prev/next y dots. Las ilustraciones son temporales y se controlan por el campo illustration de cada slide."
+  },
+  {
+    "type": "bullet",
+    "text": "Para cambiar una ilustración, editar el valor illustration en site.ts y/o las clases art-* en global.css."
+  },
+  {
+    "type": "bullet",
+    "text": "No agregar autoplay; la plantilla busca evitar movimiento innecesario."
+  },
+  {
+    "type": "h2",
+    "text": "src/components/MotionRevealScript.astro"
+  },
+  {
+    "type": "body",
+    "text": "Controla reveal fade/blur y el modo de movimiento reducido. Mantenerlo compartido para que homepage y páginas de servicio se comporten igual."
+  },
+  {
+    "type": "h1",
+    "text": "Estilos e Identidad Visual"
+  },
+  {
+    "type": "h2",
+    "text": "src/styles/global.css"
+  },
+  {
+    "type": "body",
+    "text": "Contiene todo el sistema visual: tokens de color, radios, sombras, layout, cards, hero, fondos curvos, servicios, slideshow, responsive y accesibilidad."
+  },
+  {
+    "type": "bullet",
+    "text": "Colores principales: morado #6f2c7f, teal #1188a0, aqua #6fb8c8 y fondo cálido #fbf8f5."
+  },
+  {
+    "type": "bullet",
+    "text": "Las curvas de fondo se generan con pseudo-elementos en .site-shell y .service-shell."
+  },
+  {
+    "type": "bullet",
+    "text": "Las ilustraciones temporales del slideshow usan .service-illustration y variantes .art-*."
+  },
+  {
+    "type": "bullet",
+    "text": "Si una sección se siente saturada, reducir texto antes de agregar más cards o decoraciones."
+  },
+  {
+    "type": "h1",
+    "text": "Assets y Páginas Auxiliares"
+  },
+  {
+    "type": "h2",
+    "text": "public/"
+  },
+  {
+    "type": "body",
+    "text": "Aquí viven logo, favicon, hero, alberca, fitness, wellness y mapa. Cuando lleguen assets reales, reemplazarlos manteniendo nombres o actualizar settings.images en site.ts."
+  },
+  {
+    "type": "h2",
+    "text": "src/pages/privacidad.astro, aviso-legal.astro, cookies.astro"
+  },
+  {
+    "type": "body",
+    "text": "Páginas legales básicas. El texto es provisional y responsable. Revisar con datos reales antes de publicar."
+  },
+  {
+    "type": "h2",
+    "text": "src/layouts/Layout.astro"
+  },
+  {
+    "type": "body",
+    "text": "Layout base con metadatos, favicon, Open Graph y slot de página. Editar si cambia SEO global, idioma o imagen social principal."
+  },
+  {
+    "type": "h1",
+    "text": "Validación y Publicación"
+  },
+  {
+    "type": "bullet",
+    "text": "Comando local principal: npm run build."
+  },
+  {
+    "type": "bullet",
+    "text": "Rutas esperadas: /, /servicios/nutricion, /servicios/acuaterapia, /servicios/fitness, /servicios/spa-belleza, /servicios/sauna."
+  },
+  {
+    "type": "bullet",
+    "text": "Antes de publicar, buscar residuos de marcas anteriores, rutas antiguas, numeros reales o terminos de prueba."
+  },
+  {
+    "type": "bullet",
+    "text": "No hacer deploy a Vercel hasta que el usuario autorice explícitamente publicación."
+  },
+  {
+    "type": "bullet",
+    "text": "Para GitHub, esperar la URL del repo vacío, agregar remote, commit y push de la plantilla."
+  }
+]

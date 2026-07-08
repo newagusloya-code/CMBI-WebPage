@@ -1,0 +1,145 @@
+---
+import Layout from "../../layouts/Layout.astro"
+import MotionRevealScript from "../../components/MotionRevealScript.astro"
+import ServiceSlideshow from "../../components/ServiceSlideshow.astro"
+import SiteFooter from "../../components/SiteFooter.astro"
+import SiteHeader from "../../components/SiteHeader.astro"
+import { servicePages, siteConfig } from "../../data/site"
+
+export function getStaticPaths() {
+  return servicePages.map((service) => ({
+    params: { slug: service.slug },
+    props: { service },
+  }))
+}
+
+const { service } = Astro.props
+const relatedServices = servicePages.filter((item) => item.slug !== service.slug)
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: `${service.eyebrow} | ${siteConfig.fullName}`,
+  description: service.description,
+  provider: {
+    "@type": "HealthAndBeautyBusiness",
+    name: siteConfig.fullName,
+  },
+  areaServed: "Ensenada, Baja California, México",
+}
+---
+
+<Layout title={`${service.shortTitle} | ${siteConfig.fullName}`} description={service.description}>
+  <main class="service-shell" id="contenido">
+    <SiteHeader ctaLabel="WhatsApp" ctaHref={service.whatsappHref} />
+
+    <section class="service-hero">
+      <div class="container service-hero-grid">
+        <div class="service-hero-copy reveal">
+          <a class="back-link" href="/#servicios">Servicios CMBI</a>
+          <p class="eyebrow">{service.eyebrow}</p>
+          <h1>{service.title}</h1>
+          <p class="hero-lead">{service.description}</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href={service.whatsappHref} target="_blank" rel="noreferrer">
+              {service.cta}
+            </a>
+            <a class="button button-secondary" href="/#ubicacion">Ver ubicación</a>
+          </div>
+        </div>
+
+        <figure class="service-hero-media reveal">
+          <img src={service.image} alt={service.alt} loading="eager" />
+          <figcaption>{service.shortTitle} en CMBI</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section service-overview">
+      <div class="container service-detail-grid">
+        <article class="service-info-card reveal">
+          <p class="card-eyebrow">Ideal para</p>
+          <ul>
+            {service.idealFor.map((item) => <li>{item}</li>)}
+          </ul>
+        </article>
+        <article class="service-info-card reveal">
+          <p class="card-eyebrow">Enfoque</p>
+          <ul>
+            {service.approach.map((item) => <li>{item}</li>)}
+          </ul>
+        </article>
+        <article class="service-info-card reveal">
+          <p class="card-eyebrow">Qué esperar</p>
+          <ul>
+            {service.expectations.map((item) => <li>{item}</li>)}
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section service-concepts">
+      <div class="container">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Conceptos visuales</p>
+          <h2>Una guía sencilla del tipo de experiencia que comunica este servicio.</h2>
+          <p>
+            Estas ilustraciones son temporales y editables; sirven como estructura
+            visual hasta integrar media assets reales de CMBI.
+          </p>
+        </div>
+
+        <ServiceSlideshow slides={service.slides} label={service.shortTitle} />
+      </div>
+    </section>
+
+    <section class="section service-next-step">
+      <div class="container contact-grid">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Siguiente paso</p>
+          <h2>Inicia con una pregunta breve y orientada a tu objetivo.</h2>
+          <p>
+            El enlace de WhatsApp usa un número de ejemplo por ahora. La estructura
+            quedará lista para sustituirlo cuando se definan los datos reales.
+          </p>
+        </div>
+        <div class="contact-panel reveal">
+          <p class="card-eyebrow">{service.shortTitle}</p>
+          <p>
+            Solicita información, disponibilidad o una orientación inicial sin
+            compartir datos sensibles por mensaje.
+          </p>
+          <div class="contact-actions">
+            <a class="button button-primary" href={service.whatsappHref} target="_blank" rel="noreferrer">
+              {service.cta}
+            </a>
+            <a class="button button-ghost" href="/#servicios">Volver a servicios</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section related-section">
+      <div class="container">
+        <div class="section-heading reveal">
+          <p class="eyebrow">También puede interesarte</p>
+          <h2>Otras áreas del ecosistema CMBI.</h2>
+        </div>
+        <div class="related-grid">
+          {relatedServices.map((item) => (
+            <a class="related-card reveal" href={`/servicios/${item.slug}`}>
+              <span>{item.eyebrow}</span>
+              <strong>{item.shortTitle}</strong>
+              <small>{item.description}</small>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <SiteFooter />
+  </main>
+
+  <script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
+  <MotionRevealScript />
+</Layout>

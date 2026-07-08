@@ -1,0 +1,49 @@
+---
+import { settings, siteConfig } from "../data/site"
+
+interface Props {
+  ctaLabel?: string
+  ctaHref?: string
+}
+
+const { ctaLabel = "Agendar", ctaHref = siteConfig.reserveHref } = Astro.props
+---
+
+<div class="utility-bar">
+  <div class="container utility-row">
+    <p>{siteConfig.location}</p>
+    <div class="utility-links" aria-label="Redes sociales">
+      <a href={settings.socialLinks.instagram} target="_blank" rel="noreferrer">Instagram</a>
+      <a href={settings.socialLinks.facebook} target="_blank" rel="noreferrer">Facebook</a>
+    </div>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="container header-row">
+    <a class="brand" href="/#inicio" aria-label="CMBI, volver al inicio">
+      <img
+        class="brand-logo"
+        src={settings.images.logo}
+        alt="Logo de CMBI Centro Médico de Bienestar Integral"
+      />
+      <span class="brand-copy">
+        <strong>{siteConfig.name}</strong>
+        <small>Centro Médico de Bienestar Integral</small>
+      </span>
+    </a>
+
+    <nav class="nav" aria-label="Navegación principal">
+      {siteConfig.nav.map((item) => <a href={item.href}>{item.label}</a>)}
+    </nav>
+
+    <div class="header-actions">
+      <button class="motion-toggle" type="button" data-motion-toggle aria-pressed="false">
+        Movimiento suave
+      </button>
+      <a class="button button-primary desktop-cta" href={ctaHref} target="_blank" rel="noreferrer">
+        {ctaLabel}
+      </a>
+    </div>
+  </div>
+</header>
