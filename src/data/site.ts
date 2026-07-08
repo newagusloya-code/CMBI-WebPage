@@ -45,7 +45,8 @@ export const siteConfig = {
   ],
   heroBadges: [
     "Nutrición + belleza",
-    "Spa + gym",
+    "Spa",
+    "Gimnasio funcional",
     "Sauna + alberca",
     "Atención integral",
   ],
