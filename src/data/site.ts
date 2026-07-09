@@ -39,7 +39,7 @@ export const siteConfig = {
     { label: "Servicios", href: "/#servicios" },
     { label: "Beneficios", href: "/#beneficios" },
     { label: "Instalaciones", href: "/#instalaciones" },
-    { label: "Panel", href: "/#panel" },
+    { label: "Panel", href: "/#disponibilidad" },
     { label: "Ubicación", href: "/#ubicacion" },
     { label: "Contacto", href: "/#contacto" },
   ],
