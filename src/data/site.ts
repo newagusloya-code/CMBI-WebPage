@@ -32,7 +32,7 @@ export const siteConfig = {
   fullName: "Centro Médico de Bienestar Integral",
   title: "CMBI | Centro Médico de Bienestar Integral en Ensenada",
   description:
-    "Centro Médico de Bienestar Integral en Ensenada: nutrición, belleza, spa, gym, sauna, alberca techada y terapias de bienestar en un espacio cálido y profesional.",
+    "Centro Médico de Bienestar Integral en Ensenada: bienestar para todas las edades con nutrición, terapias regenerativas, piscina techada, clases de natación, aquafitness, gimnasio funcional, sauna, faciales y masajes.",
   location: "Calle De Las Redes, zona costera de Ensenada, B.C.",
   language: "Español",
   nav: [
@@ -44,16 +44,15 @@ export const siteConfig = {
     { label: "Contacto", href: "/#contacto" },
   ],
   heroBadges: [
-    "Nutrición + belleza",
-    "Spa",
-    "Gimnasio funcional",
-    "Sauna + alberca",
-    "Atención integral",
+    "Salud y recuperación",
+    "Movimiento y entrenamiento",
+    "Agua y clases",
+    "Relajación y cuidado",
   ],
   heroStats: [
-    { value: "01", label: "Valoración clara" },
-    { value: "02", label: "Plan por objetivo" },
-    { value: "03", label: "Seguimiento humano" },
+    { value: "01", label: "Para todas las edades" },
+    { value: "02", label: "Servicios por objetivo" },
+    { value: "03", label: "Orientación cercana" },
   ],
   reserveHref: whatsappLink(
     "Hola CMBI, quiero agendar una cita y conocer disponibilidad."
@@ -63,7 +62,7 @@ export const siteConfig = {
   contactBlock: {
     heading: "Agenda por WhatsApp",
     copy:
-      "Cuéntanos qué objetivo tienes y te orientamos hacia el área adecuada: nutrición, terapia acuática, spa, sauna, gym o bienestar integral.",
+      "Cuéntanos qué necesitas y te orientamos hacia el área adecuada: nutrición, terapias regenerativas, piscina, clases, aquafitness, gym, terapia física, sauna, faciales o masajes.",
     note:
       "No compartas información clínica sensible por mensajes. El equipo puede indicarte el canal correcto para una valoración.",
   },
@@ -78,7 +77,7 @@ export const siteConfig = {
   footer: {
     copy: "Centro Médico de Bienestar Integral",
     note:
-      "Bienestar, salud y belleza en Ensenada con una experiencia cálida, ordenada y profesional.",
+      "Bienestar, salud y cuidado personal en Ensenada con una experiencia cálida, ordenada y profesional.",
   },
 } as const
 
@@ -89,7 +88,7 @@ export const servicePages = [
     title: "Nutrición para entender tu cuerpo y sostener mejores hábitos.",
     shortTitle: "Nutrición",
     description:
-      "Consulta nutricional, composición corporal y orientación realista para objetivos de salud, energía y bienestar cotidiano.",
+      "Consulta nutricional y composición corporal para metas de salud, energía y bienestar cotidiano.",
     image: settings.images.hero,
     alt:
       "Recepción luminosa de CMBI con consulta personalizada en un ambiente cálido.",
@@ -140,7 +139,7 @@ export const servicePages = [
     title: "Terapia en agua para movilidad, relajación y acompañamiento corporal.",
     shortTitle: "Acuaterapia",
     description:
-      "Sesiones en alberca techada con enfoque suave, movilidad controlada y relajación corporal responsable.",
+      "Sesiones en alberca techada para movilidad, relajación y acompañamiento corporal responsable.",
     image: settings.images.pool,
     alt: "Alberca techada de CMBI con personas realizando terapia acuática.",
     cta: "Escribir sobre acuaterapia",
@@ -184,15 +183,15 @@ export const servicePages = [
   },
   {
     slug: "fitness",
-    eyebrow: "Fitness",
-    title: "Movimiento funcional para fuerza, movilidad y constancia.",
-    shortTitle: "Fitness",
+    eyebrow: "Movimiento",
+    title: "Entrenamiento funcional con instructor para fuerza, movilidad y constancia.",
+    shortTitle: "Movimiento",
     description:
-      "Rutinas guiadas con un enfoque práctico: moverse mejor, construir fuerza y sostener una rutina posible.",
+      "Rutinas guiadas con un enfoque práctico para moverse mejor, construir fuerza y sostener una rutina posible.",
     image: settings.images.fitness,
     alt: "Gimnasio de CMBI con entrenamiento funcional y equipo profesional.",
-    cta: "Escribir sobre fitness",
-    whatsappHref: whatsappLink("Hola CMBI, quiero conocer opciones de gym y entrenamiento."),
+    cta: "Escribir sobre movimiento",
+    whatsappHref: whatsappLink("Hola CMBI, quiero conocer opciones de movimiento y entrenamiento."),
     cardCta: "Ver fitness",
     idealFor: [
       "Personas que quieren retomar actividad física con acompañamiento.",
@@ -233,10 +232,10 @@ export const servicePages = [
   {
     slug: "spa-belleza",
     eyebrow: "Spa + belleza",
-    title: "Cuidado estético y relajación con una experiencia serena.",
+    title: "Faciales y cuidado estético con una experiencia serena.",
     shortTitle: "Spa + belleza",
     description:
-      "Tratamientos de bienestar, piel y descanso sensorial con comunicación sobria y atención cercana.",
+      "Tratamientos de bienestar, piel y descanso sensorial con atención cercana.",
     image: settings.images.wellness,
     alt: "Cabina de spa con tratamiento facial en ambiente sereno.",
     cta: "Escribir sobre spa",
@@ -284,7 +283,7 @@ export const servicePages = [
     title: "Calor, pausa y recuperación en una rutina de bienestar.",
     shortTitle: "Sauna",
     description:
-      "Servicio wellness complementario para descanso, respiración y sensación de recuperación, con uso responsable.",
+      "Servicio complementario para descanso, respiración y sensación de recuperación, con uso responsable.",
     image: settings.images.wellness,
     alt: "Espacio cálido de bienestar para relajación y pausa.",
     cta: "Escribir sobre sauna",
@@ -342,7 +341,7 @@ export const serviceCards = servicePages.map((service) => ({
 export const benefitCards = [
   {
     title: "Todo en un mismo lugar",
-    copy: "Nutrición, movimiento, agua, sauna, spa y bienestar conectados sin saturar tu agenda.",
+    copy: "Nutrición, movimiento, agua, sauna, faciales y masajes conectados sin saturar tu agenda.",
   },
   {
     title: "Comunicación clara",
@@ -353,8 +352,8 @@ export const benefitCards = [
     copy: "Redacción responsable para terapias corporales, belleza y temas personales.",
   },
   {
-    title: "Experiencia premium",
-    copy: "Espacios luminosos, ritmo tranquilo y una estética coherente con el logo.",
+    title: "Experiencia humana",
+    copy: "Espacios luminosos, ritmo tranquilo y una estética coherente con la marca.",
   },
 ]
 
