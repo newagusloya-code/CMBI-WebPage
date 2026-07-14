@@ -5,13 +5,11 @@ import SiteFooter from "../components/SiteFooter.astro"
 import SiteHeader from "../components/SiteHeader.astro"
 import {
   benefitCards,
-  dashboardMetrics,
   galleryItems,
   serviceCards,
   servicePages,
   settings,
   siteConfig,
-  testimonials,
 } from "../data/site"
 
 const structuredData = {
@@ -24,10 +22,11 @@ const structuredData = {
   areaServed: "Ensenada, Baja California, México",
   address: {
     "@type": "PostalAddress",
-    streetAddress: "Calle De Las Redes",
-    addressLocality: "Ensenada",
-    addressRegion: "Baja California",
-    addressCountry: "MX",
+      streetAddress: "De Las Redes 96",
+      postalCode: "22880",
+      addressLocality: "Ensenada",
+      addressRegion: "Baja California",
+      addressCountry: "MX",
   },
   sameAs: [settings.socialLinks.instagram, settings.socialLinks.facebook],
 }
@@ -119,20 +118,33 @@ const structuredData = {
           </p>
         </div>
 
-        <div class="program-grid">
-          {serviceCards.map((card) => (
-            <article class="program-card reveal" id={card.id}>
-              <div class="card-media">
-                <img src={card.image} alt={card.alt} loading="lazy" />
-              </div>
-              <div class="card-copy">
-                <p class="card-eyebrow">{card.eyebrow}</p>
-                <h3>{card.title}</h3>
-                <p>{card.copy}</p>
-                <a href={card.href}>{card.cta}</a>
-              </div>
-            </article>
-          ))}
+        <div class="services-carousel reveal" data-services-carousel>
+          <div class="carousel-actions" aria-label="Controles de servicios">
+            <button type="button" data-carousel-prev aria-label="Ver servicios anteriores" aria-controls="services-track">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7" /></svg>
+            </button>
+            <button type="button" data-carousel-next aria-label="Ver más servicios" aria-controls="services-track">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7" /></svg>
+            </button>
+          </div>
+
+          <div id="services-track" class="program-grid" data-carousel-track tabindex="0" aria-label="Servicios CMBI">
+            {serviceCards.map((card) => (
+              <article class="program-card" id={card.id}>
+                <div class="card-media">
+                  <img src={card.image} alt={card.alt} loading="lazy" draggable="false" />
+                </div>
+                <div class="card-copy">
+                  <p class="card-eyebrow">{card.eyebrow}</p>
+                  <h3>{card.title}</h3>
+                  <p>{card.copy}</p>
+                  <a class="card-link" href={card.href} aria-label={`Ver página de ${card.eyebrow}`}>
+                    {card.cta}
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -163,66 +175,11 @@ const structuredData = {
 
         <div class="gallery-grid">
           {galleryItems.map((item) => (
-            <figure class="gallery-card reveal">
+            <a class="gallery-card reveal" href={item.href} aria-label={`Ver ${item.caption}`}>
               <img src={item.image} alt={item.alt} loading="lazy" />
-              <figcaption>{item.caption}</figcaption>
-            </figure>
+              <span class="gallery-caption">{item.caption}</span>
+            </a>
           ))}
-        </div>
-      </div>
-    </section>
-
-    <section class="section evidence-section" id="proposition">
-      <div class="container evidence-grid">
-        <div class="evidence-copy reveal">
-          <p class="eyebrow">Testimonios</p>
-          <h2>Resultados, propósitos y objetivos alcanzables.</h2>
-          <p>
-            "CMBI comunica desde la claridad: acompañamiento cercano, objetivos definidos
-            y una experiencia que evita promesas exageradas".
-          </p>
-        </div>
-
-        <div class="evidence-list">
-          {testimonials.map((item) => (
-            <article class="reveal">
-              <p class="card-eyebrow">{item.label}</p>
-              <p>{item.quote}</p>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <section class="section dashboard-section" id="disponibilidad">
-      <div class="container dashboard-grid">
-        <div class="section-heading reveal">
-          <p class="eyebrow">Panel de bienestar</p>
-          <h2>Una vista clara para ordenar servicios, citas y seguimiento.</h2>
-          <p>
-            Panel digital proximo a futuras funciones, proyecto en marcha.
-          </p>
-        </div>
-        <div class="dashboard-panel reveal" aria-label="Vista previa de dashboard CMBI">
-          <div class="dashboard-topline">
-            <span>Vista CMBI</span>
-            <strong>Semana activa</strong>
-          </div>
-          <div class="metric-grid">
-            {dashboardMetrics.map((metric) => (
-              <article>
-                <span>{metric.label}</span>
-                <strong>{metric.value}</strong>
-                <p>{metric.detail}</p>
-              </article>
-            ))}
-          </div>
-          <div class="dashboard-bars" aria-hidden="true">
-            <span style="--bar: 78%"></span>
-            <span style="--bar: 52%"></span>
-            <span style="--bar: 66%"></span>
-            <span style="--bar: 44%"></span>
-          </div>
         </div>
       </div>
     </section>
@@ -238,17 +195,18 @@ const structuredData = {
             agenda fácil de iniciar por conversación.
           </p>
           <p>
-            El mapa ayuda a decidir rápido si la visita es práctica antes de escribir
-            por WhatsApp o elegir un servicio.
+            Consulta la ubicación exacta y el horario general antes de tu visita.
           </p>
           <div class="check-grid">
-            <span>Zona costera</span>
+            <span>Playa Ensenada</span>
             <span>Agenda por WhatsApp</span>
-            <span>Alberca techada</span>
-            <span>Spa + gym</span>
+            <span>Horario general: {siteConfig.hours}</span>
+            <a href={siteConfig.locationHref} target="_blank" rel="noreferrer">Abrir ubicación</a>
           </div>
         </div>
-        <img class="map-image reveal" src={settings.images.map} alt="Mapa de ubicación aproximada de CMBI en la zona costera de Ensenada." loading="lazy" />
+        <a class="map-link reveal" href={siteConfig.locationHref} target="_blank" rel="noreferrer" aria-label="Abrir ubicación de CMBI en Google Maps">
+          <img class="map-image" src={settings.images.map} alt="Referencia visual de la ubicación de CMBI en Playa Ensenada." loading="lazy" />
+        </a>
       </div>
     </section>
 
@@ -265,7 +223,7 @@ const structuredData = {
           <p>{siteConfig.contactBlock.note}</p>
           <div class="contact-actions">
             <a class="button button-primary" href={siteConfig.reserveHref} target="_blank" rel="noreferrer">Agendar cita</a>
-            {servicePages.slice(0, 4).map((service) => (
+            {servicePages.map((service) => (
               <a class="button button-secondary" href={`/servicios/${service.slug}`}>{service.shortTitle}</a>
             ))}
           </div>
@@ -285,7 +243,6 @@ const structuredData = {
       <div class="cookie-actions">
         <button class="button button-primary" type="button" data-cookie-accept>{siteConfig.cookie.primary}</button>
         <button class="button button-secondary" type="button" data-cookie-minimal>{siteConfig.cookie.secondary}</button>
-        <button class="button button-ghost" type="button" data-cookie-preferences>{siteConfig.cookie.tertiary}</button>
       </div>
     </div>
 
@@ -299,7 +256,6 @@ const structuredData = {
     const toggle = document.querySelector("[data-cookie-toggle]");
     const accept = document.querySelector("[data-cookie-accept]");
     const minimal = document.querySelector("[data-cookie-minimal]");
-    const preferences = document.querySelector("[data-cookie-preferences]");
 
     const setConsent = (value) => {
       try {
@@ -331,7 +287,6 @@ const structuredData = {
 
     accept?.addEventListener("click", () => setConsent("accepted"));
     minimal?.addEventListener("click", () => setConsent("necessary"));
-    preferences?.addEventListener("click", () => setConsent("preferences"));
     toggle?.addEventListener("click", () => {
       if (!banner) return;
       banner.hidden = false;
@@ -341,4 +296,125 @@ const structuredData = {
 
   </script>
   <MotionRevealScript />
+  <script>
+    const carousel = document.querySelector("[data-services-carousel]");
+    const track = carousel?.querySelector("[data-carousel-track]");
+    const previous = carousel?.querySelector("[data-carousel-prev]");
+    const next = carousel?.querySelector("[data-carousel-next]");
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    if (carousel && track instanceof HTMLElement) {
+      const cardStep = () => {
+        const card = track.querySelector(".program-card");
+        if (!(card instanceof HTMLElement)) return track.clientWidth * 0.82;
+        const gap = Number.parseFloat(window.getComputedStyle(track).columnGap) || 0;
+        return card.offsetWidth + gap;
+      };
+
+      const moveByCard = (direction) => {
+        track.scrollBy({
+          left: cardStep() * direction,
+          behavior: reducedMotion.matches ? "auto" : "smooth",
+        });
+      };
+
+      previous?.addEventListener("click", () => moveByCard(-1));
+      next?.addEventListener("click", () => moveByCard(1));
+      track.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+          event.preventDefault();
+          moveByCard(event.key === "ArrowLeft" ? -1 : 1);
+        }
+      });
+
+      let edgeSpeed = 0;
+      let animationFrame = 0;
+      let dragging = false;
+      let dragged = false;
+      let dragStartX = 0;
+      let dragStartScroll = 0;
+
+      const animateEdgeScroll = () => {
+        if (edgeSpeed !== 0 && !dragging && !reducedMotion.matches) {
+          track.scrollLeft += edgeSpeed;
+          animationFrame = requestAnimationFrame(animateEdgeScroll);
+        } else {
+          animationFrame = 0;
+        }
+      };
+
+      const setEdgeSpeed = (event) => {
+        if (dragging || reducedMotion.matches || event.pointerType === "touch") return;
+        const bounds = track.getBoundingClientRect();
+        const position = (event.clientX - bounds.left) / bounds.width;
+        const edgeZone = 0.22;
+
+        if (position < edgeZone) {
+          edgeSpeed = -Math.max(2, ((edgeZone - position) / edgeZone) * 12);
+        } else if (position > 1 - edgeZone) {
+          edgeSpeed = Math.max(2, ((position - (1 - edgeZone)) / edgeZone) * 12);
+        } else {
+          edgeSpeed = 0;
+        }
+
+        if (edgeSpeed !== 0 && animationFrame === 0) {
+          animationFrame = requestAnimationFrame(animateEdgeScroll);
+        }
+      };
+
+      track.addEventListener("pointermove", (event) => {
+        if (dragging) {
+          if (Math.abs(event.clientX - dragStartX) > 6) dragged = true;
+          track.scrollLeft = dragStartScroll - (event.clientX - dragStartX);
+          return;
+        }
+        setEdgeSpeed(event);
+      });
+
+      track.addEventListener("mousemove", (event) => {
+        if (!dragging) setEdgeSpeed(event);
+      });
+
+      track.addEventListener("pointerleave", () => {
+        edgeSpeed = 0;
+        dragging = false;
+        track.removeAttribute("data-dragging");
+      });
+
+      track.addEventListener("pointerdown", (event) => {
+        if (event.pointerType === "touch" || event.button !== 0) return;
+        dragging = true;
+        dragged = false;
+        edgeSpeed = 0;
+        dragStartX = event.clientX;
+        dragStartScroll = track.scrollLeft;
+        track.setAttribute("data-dragging", "true");
+        track.setPointerCapture(event.pointerId);
+      });
+
+      track.addEventListener("pointerup", (event) => {
+        if (!dragging) return;
+        dragging = false;
+        track.removeAttribute("data-dragging");
+        track.releasePointerCapture(event.pointerId);
+      });
+
+      track.addEventListener("pointercancel", () => {
+        dragging = false;
+        track.removeAttribute("data-dragging");
+      });
+
+      track.addEventListener("click", (event) => {
+        if (!dragged) return;
+        event.preventDefault();
+        dragged = false;
+      }, { capture: true });
+
+      track.addEventListener("wheel", (event) => {
+        if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return;
+        event.preventDefault();
+        track.scrollLeft += event.deltaY;
+      }, { passive: false });
+    }
+  </script>
 </Layout>

@@ -1,36 +1,50 @@
 <script>
-  const motionKey = "cmbi-motion";
-  const motionToggle = document.querySelector("[data-motion-toggle]");
+  const root = document.documentElement;
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-  const setMotion = (value) => {
-    document.documentElement.dataset.motion = value;
-    motionToggle?.setAttribute("aria-pressed", value === "reduced" ? "true" : "false");
-    if (motionToggle) {
-      motionToggle.textContent = value === "reduced" ? "Movimiento instantáneo" : "Movimiento suave";
-    }
-    try {
-      window.localStorage.setItem(motionKey, value);
-    } catch {}
-  };
-
-  const initialMotion = (() => {
-    try {
-      return window.localStorage.getItem(motionKey);
-    } catch {
-      return null;
-    }
-  })();
-
-  if (initialMotion) {
-    setMotion(initialMotion);
-  } else if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    setMotion("reduced");
+  root.dataset.js = "true";
+  if (prefersReducedMotion.matches) {
+    root.dataset.motion = "reduced";
   }
 
-  motionToggle?.addEventListener("click", () => {
-    const current = document.documentElement.dataset.motion === "reduced" ? "smooth" : "reduced";
-    setMotion(current);
-  });
+  const getHeaderOffset = () => {
+    const utilityBar = document.querySelector(".utility-bar");
+    const siteHeader = document.querySelector(".site-header");
+    return (utilityBar?.offsetHeight ?? 0) + (siteHeader?.offsetHeight ?? 0) + 16;
+  };
+
+  const scrollToHashTarget = (hash, force = false) => {
+    if (!hash) return;
+
+    const id = decodeURIComponent(hash.slice(1));
+    if (!id) return;
+
+    const target = document.getElementById(id);
+    if (!target) return;
+
+    const reduceMotion = root.dataset.motion === "reduced" || prefersReducedMotion.matches;
+    const top = Math.max(0, window.scrollY + target.getBoundingClientRect().top - getHeaderOffset());
+    const difference = Math.abs(window.scrollY - top);
+
+    if (!force && difference < 4) return;
+
+    window.scrollTo({
+      top,
+      behavior: reduceMotion ? "auto" : "smooth",
+    });
+  };
+
+  const syncHashScroll = (force = false) => {
+    if (!window.location.hash) return;
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        scrollToHashTarget(window.location.hash, force);
+      });
+    });
+  };
+
+  window.addEventListener("load", () => syncHashScroll(true), { once: true });
+  window.addEventListener("hashchange", () => syncHashScroll(true));
 
   const observer = new IntersectionObserver(
     (entries) => {
