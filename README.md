@@ -50,10 +50,11 @@ Desde ese archivo se editan:
 - bloques de servicios
 - FAQ
 
-Importante:
+Datos confirmados en la version local:
 
-- Los datos de contacto en la version actual quedaron como placeholders.
-- No publicar sin reemplazar `whatsappNumber`, `whatsappDisplay`, `phoneDisplay`, `streetAddress` y `neighborhood`.
+- WhatsApp: `646 255 02 05`
+- Direccion: `De Las Redes 96, Playa Ensenada, 22880 Ensenada, B.C.`
+- Horario general: `7:00 am - 8:00 pm`
 
 ## Assets
 
@@ -65,6 +66,10 @@ Los assets publicos viven en:
 - `public/cmbi-fitness.png`
 - `public/cmbi-wellness.png`
 - `public/cmbi-map.png`
+- `public/cmbi-nutrition-demo.jpg`
+- `public/cmbi-cafeteria-demo.jpg`
+- `public/cmbi-sauna-demo.jpg`
+- `public/cmbi-supplements-demo.jpg`
 
 Las imagenes actuales sirven como base visual premium. Conviene reemplazarlas por fotografias reales del centro cuando esten disponibles.
 
@@ -89,8 +94,6 @@ Configuracion recomendada en Vercel:
 
 ## Checklist antes de publicar
 
-- Confirmar numero final de WhatsApp
-- Confirmar direccion exacta y horarios
 - Sustituir placeholders visuales por fotos reales si ya existen
 - Revisar enlaces a Instagram y Facebook
 - Validar textos legales con el criterio final del negocio

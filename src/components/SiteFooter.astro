@@ -18,7 +18,9 @@ import { footerLinks, settings, siteConfig } from "../data/site"
     <div>
       <h3>Contacto</h3>
       <p>{siteConfig.location}</p>
-      <a href={siteConfig.reserveHref} target="_blank" rel="noreferrer">WhatsApp CMBI</a>
+      <p>Horario general: {siteConfig.hours}</p>
+      <a href={siteConfig.locationHref} target="_blank" rel="noreferrer">Abrir ubicación</a>
+      <a href={siteConfig.reserveHref} target="_blank" rel="noreferrer">WhatsApp: {siteConfig.whatsappDisplay}</a>
     </div>
   </div>
 </footer>

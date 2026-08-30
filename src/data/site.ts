@@ -1,4 +1,4 @@
-const WHATSAPP_NUMBER = "520000000000"
+const WHATSAPP_NUMBER = "526462550205"
 
 const whatsappLink = (message: string) =>
   `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`
@@ -16,6 +16,10 @@ export const settings = {
     pool: "/cmbi-pool.png",
     wellness: "/cmbi-wellness.png",
     fitness: "/cmbi-fitness.png",
+    nutrition: "/cmbi-nutrition-demo.jpg",
+    sauna: "/cmbi-sauna-demo.jpg",
+    cafeteria: "/cmbi-cafeteria-demo.jpg",
+    supplements: "/cmbi-supplements-demo.jpg",
     map: "/cmbi-map.png",
   },
   colors: {
@@ -32,27 +36,29 @@ export const siteConfig = {
   fullName: "Centro Médico de Bienestar Integral",
   title: "CMBI | Centro Médico de Bienestar Integral en Ensenada",
   description:
-    "Centro Médico de Bienestar Integral en Ensenada: nutrición, belleza, spa, gym, sauna, alberca techada y terapias de bienestar en un espacio cálido y profesional.",
-  location: "Calle De Las Redes, zona costera de Ensenada, B.C.",
+    "Centro Médico de Bienestar Integral en Ensenada: salud, movimiento, agua, cuidado personal, cafetería y suplementación para el bienestar.",
+  location: "De Las Redes 96, Playa Ensenada, 22880 Ensenada, B.C.",
+  locationHref: "https://share.google/n5f3FLKdCwjQPWkZ",
+  hours: "7:00 am - 8:00 pm",
+  whatsappDisplay: "646 255 02 05",
   language: "Español",
   nav: [
     { label: "Servicios", href: "/#servicios" },
     { label: "Beneficios", href: "/#beneficios" },
     { label: "Instalaciones", href: "/#instalaciones" },
-    { label: "Panel", href: "/#panel" },
     { label: "Ubicación", href: "/#ubicacion" },
     { label: "Contacto", href: "/#contacto" },
   ],
   heroBadges: [
-    "Nutrición + belleza",
-    "Spa + gym",
-    "Sauna + alberca",
-    "Atención integral",
+    "Salud y recuperación",
+    "Movimiento y entrenamiento",
+    "Agua y clases",
+    "Relajación y cuidado",
   ],
   heroStats: [
-    { value: "01", label: "Valoración clara" },
-    { value: "02", label: "Plan por objetivo" },
-    { value: "03", label: "Seguimiento humano" },
+    { value: "01", label: "Para todas las edades" },
+    { value: "02", label: "Servicios por objetivo" },
+    { value: "03", label: "Orientación cercana" },
   ],
   reserveHref: whatsappLink(
     "Hola CMBI, quiero agendar una cita y conocer disponibilidad."
@@ -62,7 +68,7 @@ export const siteConfig = {
   contactBlock: {
     heading: "Agenda por WhatsApp",
     copy:
-      "Cuéntanos qué objetivo tienes y te orientamos hacia el área adecuada: nutrición, terapia acuática, spa, sauna, gym o bienestar integral.",
+      "Cuéntanos qué necesitas y te orientamos hacia el área adecuada, desde nutrición y movimiento hasta recuperación, cuidado personal y servicios complementarios.",
     note:
       "No compartas información clínica sensible por mensajes. El equipo puede indicarte el canal correcto para una valoración.",
   },
@@ -70,14 +76,13 @@ export const siteConfig = {
     title: "Preferencias de cookies",
     body:
       "Usamos cookies necesarias para recordar tus preferencias de interfaz y mejorar la experiencia del sitio.",
-    primary: "Aceptar todo",
+    primary: "Aceptar",
     secondary: "Solo necesarias",
-    tertiary: "Configurar",
   },
   footer: {
     copy: "Centro Médico de Bienestar Integral",
     note:
-      "Bienestar, salud y belleza en Ensenada con una experiencia cálida, ordenada y profesional.",
+      "Bienestar, salud y cuidado personal en Ensenada con una experiencia cálida, ordenada y profesional.",
   },
 } as const
 
@@ -88,10 +93,10 @@ export const servicePages = [
     title: "Nutrición para entender tu cuerpo y sostener mejores hábitos.",
     shortTitle: "Nutrición",
     description:
-      "Consulta nutricional, composición corporal y orientación realista para objetivos de salud, energía y bienestar cotidiano.",
-    image: settings.images.hero,
+      "Consulta nutricional y composición corporal para metas de salud, energía y bienestar cotidiano.",
+    image: settings.images.nutrition,
     alt:
-      "Recepción luminosa de CMBI con consulta personalizada en un ambiente cálido.",
+      "Imagen demo de una comida balanceada con vegetales, proteína, fruta y agua.",
     cta: "Escribir sobre nutrición",
     whatsappHref: whatsappLink(
       "Hola CMBI, me interesa una consulta de nutrición y composición corporal."
@@ -139,7 +144,7 @@ export const servicePages = [
     title: "Terapia en agua para movilidad, relajación y acompañamiento corporal.",
     shortTitle: "Acuaterapia",
     description:
-      "Sesiones en alberca techada con enfoque suave, movilidad controlada y relajación corporal responsable.",
+      "Sesiones en alberca techada para movilidad, relajación y acompañamiento corporal responsable.",
     image: settings.images.pool,
     alt: "Alberca techada de CMBI con personas realizando terapia acuática.",
     cta: "Escribir sobre acuaterapia",
@@ -183,15 +188,15 @@ export const servicePages = [
   },
   {
     slug: "fitness",
-    eyebrow: "Fitness",
-    title: "Movimiento funcional para fuerza, movilidad y constancia.",
-    shortTitle: "Fitness",
+    eyebrow: "Movimiento",
+    title: "Entrenamiento funcional con instructor para fuerza, movilidad y constancia.",
+    shortTitle: "Movimiento",
     description:
-      "Rutinas guiadas con un enfoque práctico: moverse mejor, construir fuerza y sostener una rutina posible.",
+      "Rutinas guiadas con un enfoque práctico para moverse mejor, construir fuerza y sostener una rutina posible.",
     image: settings.images.fitness,
     alt: "Gimnasio de CMBI con entrenamiento funcional y equipo profesional.",
-    cta: "Escribir sobre fitness",
-    whatsappHref: whatsappLink("Hola CMBI, quiero conocer opciones de gym y entrenamiento."),
+    cta: "Escribir sobre movimiento",
+    whatsappHref: whatsappLink("Hola CMBI, quiero conocer opciones de movimiento y entrenamiento."),
     cardCta: "Ver fitness",
     idealFor: [
       "Personas que quieren retomar actividad física con acompañamiento.",
@@ -232,10 +237,10 @@ export const servicePages = [
   {
     slug: "spa-belleza",
     eyebrow: "Spa + belleza",
-    title: "Cuidado estético y relajación con una experiencia serena.",
+    title: "Faciales y cuidado estético con una experiencia serena.",
     shortTitle: "Spa + belleza",
     description:
-      "Tratamientos de bienestar, piel y descanso sensorial con comunicación sobria y atención cercana.",
+      "Tratamientos de bienestar, piel y descanso sensorial con atención cercana.",
     image: settings.images.wellness,
     alt: "Cabina de spa con tratamiento facial en ambiente sereno.",
     cta: "Escribir sobre spa",
@@ -283,9 +288,9 @@ export const servicePages = [
     title: "Calor, pausa y recuperación en una rutina de bienestar.",
     shortTitle: "Sauna",
     description:
-      "Servicio wellness complementario para descanso, respiración y sensación de recuperación, con uso responsable.",
-    image: settings.images.wellness,
-    alt: "Espacio cálido de bienestar para relajación y pausa.",
+      "Servicio complementario para descanso, respiración y sensación de recuperación, con uso responsable.",
+    image: settings.images.sauna,
+    alt: "Imagen demo de una cabina contemporánea de sauna seco.",
     cta: "Escribir sobre sauna",
     whatsappHref: whatsappLink("Hola CMBI, quiero información sobre el servicio de sauna."),
     cardCta: "Ver sauna",
@@ -325,6 +330,64 @@ export const servicePages = [
       },
     ],
   },
+  {
+    slug: "cafeteria",
+    eyebrow: "Cafetería",
+    title: "Colaciones y alimentos alineados con tu orientación nutricional.",
+    shortTitle: "Cafetería",
+    description:
+      "Artículos para colaciones y opciones de comida bajas en grasa, azúcar y calorías, pensadas para facilitar el seguimiento de tu plan de nutrición.",
+    image: settings.images.cafeteria,
+    alt: "Imagen demo de dulces y colaciones sin marca en una cafetería de bienestar.",
+    cta: "Escribir sobre cafetería",
+    whatsappHref: whatsappLink("Hola CMBI, quiero información sobre las opciones de cafetería y colaciones."),
+    cardCta: "Ver cafetería",
+    idealFor: [
+      "Personas que salen de su consulta de nutrición con un plan definido.",
+      "Quienes buscan colaciones prácticas dentro del mismo centro.",
+      "Personas que quieren opciones con información clara antes de elegir.",
+    ],
+    approach: [
+      "Opciones pensadas como apoyo práctico a la orientación nutricional.",
+      "Selección enfocada en alternativas bajas en grasa, azúcar y calorías.",
+      "Disponibilidad sujeta al menú y a las recomendaciones de cada consulta.",
+    ],
+    expectations: [
+      "Consulta de opciones disponibles en el día.",
+      "Elección acorde con tu plan y preferencias.",
+      "Orientación privada cuando una recomendación requiera más contexto.",
+    ],
+    slides: [],
+  },
+  {
+    slug: "suplementacion",
+    eyebrow: "Suplementación",
+    title: "Suplementación para tu bienestar con orientación personalizada.",
+    shortTitle: "Suplementación",
+    description:
+      "Opciones de suplementación general disponibles con información privada y consulta para elegir de forma responsable.",
+    image: settings.images.supplements,
+    alt: "Imagen demo de un multivitamínico genérico sin marca junto a un vaso de agua.",
+    cta: "Consultar suplementación",
+    whatsappHref: whatsappLink("Hola CMBI, quiero información sobre suplementación para el bienestar."),
+    cardCta: "Ver suplementación",
+    idealFor: [
+      "Adultos que buscan información general sobre suplementación de bienestar.",
+      "Personas que prefieren consultar antes de elegir un producto.",
+      "Quienes desean integrar la suplementación a un plan más amplio.",
+    ],
+    approach: [
+      "Información clara y atención privada.",
+      "Selección responsable según contexto, objetivos y orientación profesional.",
+      "Sin sustituir una valoración médica ni hacer promesas de resultados.",
+    ],
+    expectations: [
+      "Conversación inicial sobre el objetivo de bienestar.",
+      "Información sobre opciones y disponibilidad.",
+      "Recomendación de consulta cuando el contexto lo requiera.",
+    ],
+    slides: [],
+  },
 ] as const
 
 export const serviceCards = servicePages.map((service) => ({
@@ -341,7 +404,7 @@ export const serviceCards = servicePages.map((service) => ({
 export const benefitCards = [
   {
     title: "Todo en un mismo lugar",
-    copy: "Nutrición, movimiento, agua, sauna, spa y bienestar conectados sin saturar tu agenda.",
+    copy: "Salud, movimiento, agua, cuidado personal y servicios complementarios reunidos en un mismo lugar.",
   },
   {
     title: "Comunicación clara",
@@ -352,57 +415,120 @@ export const benefitCards = [
     copy: "Redacción responsable para terapias corporales, belleza y temas personales.",
   },
   {
-    title: "Experiencia premium",
-    copy: "Espacios luminosos, ritmo tranquilo y una estética coherente con el logo.",
+    title: "Experiencia humana",
+    copy: "Espacios luminosos, ritmo tranquilo y una estética coherente con la marca.",
   },
 ]
 
-export const galleryItems = [
+export const installationPages = [
   {
+    slug: "recepcion",
+    eyebrow: "Recepción",
+    shortTitle: "Recepción cálida",
+    title: "Un primer espacio para orientarte con calma.",
+    description:
+      "La recepción de CMBI es el punto de inicio para conocer las áreas, resolver dudas y encontrar el siguiente paso para tu visita.",
     image: settings.images.hero,
-    alt: "Recepción premium de CMBI con logo visible y área de espera.",
-    caption: "Recepción cálida",
+    alt: "Recepción de CMBI con área de espera, consultorio y alberca al fondo.",
+    idealFor: [
+      "Personas que visitan CMBI por primera vez.",
+      "Familias que necesitan ubicar servicios y horarios.",
+      "Quienes prefieren recibir orientación antes de elegir un área.",
+    ],
+    features: [
+      "Área de bienvenida y espera.",
+      "Orientación sobre servicios y disponibilidad.",
+      "Acceso sencillo hacia las principales áreas del centro.",
+    ],
+    expectations: [
+      "Una llegada ordenada y clara.",
+      "Información breve sobre el servicio que buscas.",
+      "Acompañamiento para iniciar tu visita.",
+    ],
   },
   {
+    slug: "alberca-techada",
+    eyebrow: "Alberca techada",
+    shortTitle: "Alberca techada",
+    title: "Un espacio acuático para movimiento y acompañamiento corporal.",
+    description:
+      "La alberca techada permite realizar actividades acuáticas durante todo el año, con un entorno cómodo para terapia, clases y movilidad.",
     image: settings.images.pool,
-    alt: "Alberca interior techada para terapia acuática.",
-    caption: "Alberca techada",
+    alt: "Alberca interior techada de CMBI para actividades acuáticas.",
+    idealFor: [
+      "Personas interesadas en actividades acuáticas.",
+      "Quienes buscan movimiento de bajo o mediano impacto.",
+      "Familias que consultan clases o sesiones en agua.",
+    ],
+    features: [
+      "Espacio interior protegido del clima.",
+      "Área para terapia acuática y clases.",
+      "Ambiente pensado para moverse con acompañamiento.",
+    ],
+    expectations: [
+      "Consulta de horarios y disponibilidad.",
+      "Orientación sobre la actividad adecuada.",
+      "Uso acompañado según el servicio elegido.",
+    ],
   },
   {
+    slug: "fitness-guiado",
+    eyebrow: "Fitness guiado",
+    shortTitle: "Fitness guiado",
+    title: "Movimiento funcional en un espacio preparado para entrenar.",
+    description:
+      "El área de fitness reúne equipo funcional y un entorno de trabajo para construir una rutina de movimiento con orientación del instructor.",
     image: settings.images.fitness,
-    alt: "Área de gimnasio con equipo funcional.",
-    caption: "Fitness guiado",
+    alt: "Área de fitness de CMBI con equipo funcional.",
+    idealFor: [
+      "Personas que quieren retomar una rutina de movimiento.",
+      "Quienes prefieren entrenar con orientación.",
+      "Objetivos de fuerza, movilidad y constancia.",
+    ],
+    features: [
+      "Equipo para trabajo funcional.",
+      "Rutinas adaptadas al objetivo y experiencia.",
+      "Acompañamiento de instructor durante la actividad.",
+    ],
+    expectations: [
+      "Una conversación inicial sobre tu objetivo.",
+      "Indicaciones claras para usar el espacio.",
+      "Progresión acorde con tu ritmo y disponibilidad.",
+    ],
   },
   {
+    slug: "spa-belleza",
+    eyebrow: "Spa y belleza",
+    shortTitle: "Spa y belleza",
+    title: "Un espacio sereno para cuidado personal y descanso.",
+    description:
+      "El área de spa y belleza ofrece un entorno tranquilo para faciales y servicios de cuidado personal con atención cercana.",
     image: settings.images.wellness,
-    alt: "Cabina de spa y tratamiento de bienestar.",
-    caption: "Spa y belleza",
+    alt: "Cabina de spa y tratamiento de bienestar en CMBI.",
+    idealFor: [
+      "Personas que buscan una pausa de cuidado personal.",
+      "Quienes desean conocer opciones de faciales y bienestar.",
+      "Usuarios que prefieren una experiencia tranquila y acompañada.",
+    ],
+    features: [
+      "Cabina de atención en un ambiente sereno.",
+      "Servicios de cuidado facial y bienestar.",
+      "Orientación sobre opciones y disponibilidad.",
+    ],
+    expectations: [
+      "Información clara sobre el servicio.",
+      "Un ritmo de atención tranquilo.",
+      "Recomendaciones de cuidado acordes con el servicio elegido.",
+    ],
   },
-]
+] as const
 
-export const testimonials = [
-  {
-    label: "Bienestar",
-    quote:
-      "Un espacio pensado para llegar, respirar y entender qué servicio necesitas sin ruido.",
-  },
-  {
-    label: "Claridad",
-    quote:
-      "La experiencia se siente profesional porque ordena nutrición, terapia, gym, sauna y spa por intención.",
-  },
-  {
-    label: "Confianza",
-    quote:
-      "El tono evita exageraciones: acompaña, explica y dirige a una conversación responsable.",
-  },
-]
-
-export const dashboardMetrics = [
-  { label: "Citas por WhatsApp", value: "24h", detail: "Mensajes por intención" },
-  { label: "Servicios activos", value: "6", detail: "Nutrición, agua, gym, sauna, spa, belleza" },
-  { label: "Seguimiento", value: "1:1", detail: "Orientación cercana por objetivo" },
-]
+export const galleryItems = installationPages.map((installation) => ({
+  image: installation.image,
+  alt: installation.alt,
+  caption: installation.shortTitle,
+  href: `/instalaciones/${installation.slug}`,
+}))
 
 export const footerLinks = [
   { label: "Aviso legal", href: "/aviso-legal" },

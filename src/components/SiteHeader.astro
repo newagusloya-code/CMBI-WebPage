@@ -33,17 +33,89 @@ const { ctaLabel = "Agendar", ctaHref = siteConfig.reserveHref } = Astro.props
       </span>
     </a>
 
-    <nav class="nav" aria-label="Navegación principal">
+    <button
+      class="menu-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="site-menu"
+      data-menu-toggle
+    >
+      Menú
+    </button>
+
+    <nav class="nav desktop-nav" aria-label="Navegación principal">
       {siteConfig.nav.map((item) => <a href={item.href}>{item.label}</a>)}
     </nav>
 
     <div class="header-actions">
-      <button class="motion-toggle" type="button" data-motion-toggle aria-pressed="false">
-        Movimiento suave
-      </button>
       <a class="button button-primary desktop-cta" href={ctaHref} target="_blank" rel="noreferrer">
         {ctaLabel}
       </a>
     </div>
   </div>
+
+  <nav
+    class="mobile-nav"
+    id="site-menu"
+    aria-label="Navegación principal móvil"
+    data-mobile-menu
+    data-open="false"
+  >
+    <div class="container mobile-nav-inner">
+      {siteConfig.nav.map((item) => (
+        <a href={item.href} data-mobile-link>{item.label}</a>
+      ))}
+    </div>
+  </nav>
 </header>
+
+<script>
+  const header = document.querySelector(".site-header");
+  const menuToggle = header?.querySelector("[data-menu-toggle]");
+  const mobileMenu = document.querySelector("[data-mobile-menu]");
+  const mobileLinks = mobileMenu?.querySelectorAll("[data-mobile-link]") ?? [];
+  const desktopQuery = window.matchMedia("(min-width: 980px)");
+
+  const setMenuState = (isOpen) => {
+    if (!menuToggle || !mobileMenu) return;
+    menuToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    mobileMenu.setAttribute("data-open", isOpen ? "true" : "false");
+  };
+
+  const closeMenu = () => setMenuState(false);
+
+  const syncMenuForViewport = () => {
+    if (desktopQuery.matches) {
+      closeMenu();
+      return;
+    }
+
+    if (!menuToggle || !mobileMenu) return;
+    const expanded = menuToggle.getAttribute("aria-expanded") === "true";
+    mobileMenu.setAttribute("data-open", expanded ? "true" : "false");
+  };
+
+  setMenuState(false);
+  syncMenuForViewport();
+
+  menuToggle?.addEventListener("click", () => {
+    const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
+    setMenuState(!isOpen);
+  });
+
+  mobileLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      closeMenu();
+      menuToggle?.focus();
+    });
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape") return;
+    if (menuToggle?.getAttribute("aria-expanded") !== "true") return;
+    closeMenu();
+    menuToggle?.focus();
+  });
+
+  desktopQuery.addEventListener("change", syncMenuForViewport);
+</script>

@@ -1,0 +1,127 @@
+---
+import Layout from "../../layouts/Layout.astro"
+import MotionRevealScript from "../../components/MotionRevealScript.astro"
+import SiteFooter from "../../components/SiteFooter.astro"
+import SiteHeader from "../../components/SiteHeader.astro"
+import { installationPages, siteConfig } from "../../data/site"
+
+export function getStaticPaths() {
+  return installationPages.map((installation) => ({
+    params: { slug: installation.slug },
+    props: { installation },
+  }))
+}
+
+const { installation } = Astro.props
+const relatedInstallations = installationPages.filter((item) => item.slug !== installation.slug)
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Place",
+  name: `${installation.shortTitle} | ${siteConfig.fullName}`,
+  description: installation.description,
+  image: installation.image,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "De Las Redes 96",
+    postalCode: "22880",
+    addressLocality: "Ensenada",
+    addressRegion: "Baja California",
+    addressCountry: "MX",
+  },
+}
+---
+
+<Layout title={`${installation.shortTitle} | ${siteConfig.fullName}`} description={installation.description}>
+  <main class="service-shell" id="contenido">
+    <SiteHeader />
+
+    <section class="service-hero">
+      <div class="container service-hero-grid">
+        <div class="service-hero-copy reveal">
+          <a class="back-link" href="/#instalaciones">Instalaciones CMBI</a>
+          <p class="eyebrow">{installation.eyebrow}</p>
+          <h1>{installation.title}</h1>
+          <p class="hero-lead">{installation.description}</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href={siteConfig.reserveHref} target="_blank" rel="noreferrer">
+              Consultar disponibilidad
+            </a>
+            <a class="button button-secondary" href="/#ubicacion">Ver ubicación</a>
+          </div>
+        </div>
+
+        <figure class="service-hero-media reveal">
+          <img src={installation.image} alt={installation.alt} loading="eager" />
+          <figcaption>{installation.shortTitle} en CMBI</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section service-overview">
+      <div class="container service-detail-grid">
+        <article class="service-info-card reveal">
+          <p class="card-eyebrow">Ideal para</p>
+          <ul>
+            {installation.idealFor.map((item) => <li>{item}</li>)}
+          </ul>
+        </article>
+        <article class="service-info-card reveal">
+          <p class="card-eyebrow">Qué encontrarás</p>
+          <ul>
+            {installation.features.map((item) => <li>{item}</li>)}
+          </ul>
+        </article>
+        <article class="service-info-card reveal">
+          <p class="card-eyebrow">Qué esperar</p>
+          <ul>
+            {installation.expectations.map((item) => <li>{item}</li>)}
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section service-next-step">
+      <div class="container contact-grid">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Siguiente paso</p>
+          <h2>Conoce el espacio y consulta cómo puedes utilizarlo.</h2>
+          <p>El equipo de CMBI puede orientarte sobre servicios, horarios y disponibilidad.</p>
+        </div>
+        <div class="contact-panel reveal">
+          <p class="card-eyebrow">{installation.shortTitle}</p>
+          <p>Escríbenos para conocer la opción adecuada para tu visita.</p>
+          <div class="contact-actions">
+            <a class="button button-primary" href={siteConfig.reserveHref} target="_blank" rel="noreferrer">
+              Consultar por WhatsApp
+            </a>
+            <a class="button button-ghost" href="/#instalaciones">Volver a instalaciones</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section related-section">
+      <div class="container">
+        <div class="section-heading reveal">
+          <p class="eyebrow">También puede interesarte</p>
+          <h2>Conoce otras áreas de CMBI.</h2>
+        </div>
+        <div class="related-grid">
+          {relatedInstallations.map((item) => (
+            <a class="related-card reveal" href={`/instalaciones/${item.slug}`}>
+              <span>{item.eyebrow}</span>
+              <strong>{item.shortTitle}</strong>
+              <small>{item.description}</small>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <SiteFooter />
+  </main>
+
+  <script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
+  <MotionRevealScript />
+</Layout>

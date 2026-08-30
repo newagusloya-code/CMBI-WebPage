@@ -1,7 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro"
 import MotionRevealScript from "../../components/MotionRevealScript.astro"
-import ServiceSlideshow from "../../components/ServiceSlideshow.astro"
 import SiteFooter from "../../components/SiteFooter.astro"
 import SiteHeader from "../../components/SiteHeader.astro"
 import { servicePages, siteConfig } from "../../data/site"
@@ -78,30 +77,12 @@ const structuredData = {
       </div>
     </section>
 
-    <section class="section service-concepts">
-      <div class="container">
-        <div class="section-heading reveal">
-          <p class="eyebrow">Conceptos visuales</p>
-          <h2>Una guía sencilla del tipo de experiencia que comunica este servicio.</h2>
-          <p>
-            Estas ilustraciones son temporales y editables; sirven como estructura
-            visual hasta integrar media assets reales de CMBI.
-          </p>
-        </div>
-
-        <ServiceSlideshow slides={service.slides} label={service.shortTitle} />
-      </div>
-    </section>
-
     <section class="section service-next-step">
       <div class="container contact-grid">
         <div class="section-heading reveal">
           <p class="eyebrow">Siguiente paso</p>
           <h2>Inicia con una pregunta breve y orientada a tu objetivo.</h2>
-          <p>
-            El enlace de WhatsApp usa un número de ejemplo por ahora. La estructura
-            quedará lista para sustituirlo cuando se definan los datos reales.
-          </p>
+          <p>Consulta información y disponibilidad directamente con el equipo de CMBI.</p>
         </div>
         <div class="contact-panel reveal">
           <p class="card-eyebrow">{service.shortTitle}</p>

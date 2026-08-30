@@ -5,13 +5,11 @@ import SiteFooter from "../components/SiteFooter.astro"
 import SiteHeader from "../components/SiteHeader.astro"
 import {
   benefitCards,
-  dashboardMetrics,
   galleryItems,
   serviceCards,
   servicePages,
   settings,
   siteConfig,
-  testimonials,
 } from "../data/site"
 
 const structuredData = {
@@ -24,10 +22,11 @@ const structuredData = {
   areaServed: "Ensenada, Baja California, México",
   address: {
     "@type": "PostalAddress",
-    streetAddress: "Calle De Las Redes",
-    addressLocality: "Ensenada",
-    addressRegion: "Baja California",
-    addressCountry: "MX",
+      streetAddress: "De Las Redes 96",
+      postalCode: "22880",
+      addressLocality: "Ensenada",
+      addressRegion: "Baja California",
+      addressCountry: "MX",
   },
   sameAs: [settings.socialLinks.instagram, settings.socialLinks.facebook],
 }
@@ -50,18 +49,18 @@ const structuredData = {
 
       <div class="container hero-grid">
         <div class="hero-copy reveal">
-          <p class="eyebrow">Bienestar integral en Ensenada</p>
-          <h1>Cuidado médico, belleza y movimiento en un espacio sereno.</h1>
+          <p class="eyebrow">Bienestar integral para todas las edades</p>
+          <h1>Salud, movimiento y cuidado personal en un solo lugar.</h1>
           <p class="hero-lead">
-            CMBI reúne nutrición, spa, gym, alberca techada y terapias de bienestar
-            en una experiencia clara, cálida y profesional.
+            CMBI reúne nutrición, terapias regenerativas, agua, movimiento y cuidado
+            personal para que cada persona encuentre rápido el servicio que necesita.
           </p>
           <div class="hero-actions">
             <a class="button button-primary" href={siteConfig.reserveHref} target="_blank" rel="noreferrer">Agendar por WhatsApp</a>
             <a class="button button-secondary" href={siteConfig.consultHref}>Ver servicios</a>
-            <a class="button button-ghost" href={siteConfig.experienceHref}>Conocer espacios</a>
+            <a class="button button-ghost" href={siteConfig.experienceHref}>Ver instalaciones</a>
           </div>
-          <div class="badge-row" aria-label="Pilares de CMBI">
+          <div class="badge-row" aria-label="Áreas principales de CMBI">
             {siteConfig.heroBadges.map((badge) => <span>{badge}</span>)}
           </div>
         </div>
@@ -70,9 +69,9 @@ const structuredData = {
           <div class="panel-card">
             <p class="panel-eyebrow">Atención por intención</p>
             <ul>
-              <li>Primero entendemos tu objetivo: salud, relajación, movimiento o estética.</li>
-              <li>Después te dirigimos al área adecuada sin saturarte de información.</li>
-              <li>La agenda por WhatsApp usa mensajes prellenados según el servicio.</li>
+              <li>Primero entendemos tu objetivo y la etapa de vida de la persona.</li>
+              <li>Organizamos los servicios por salud, movimiento, agua y cuidado personal.</li>
+              <li>Te ayudamos a dar el siguiente paso sin saturarte de información.</li>
             </ul>
           </div>
 
@@ -92,11 +91,11 @@ const structuredData = {
       <div class="container split-grid">
         <div class="section-heading reveal">
           <p class="eyebrow">Ruta de atención</p>
-          <h2>Menos catálogo, más dirección: cada visita inicia con una intención.</h2>
+          <h2>Una ruta clara para elegir el servicio adecuado.</h2>
           <p>
-            CMBI organiza sus áreas para que puedas elegir con calma: salud, relajación,
-            movimiento, belleza o bienestar integral. La experiencia prioriza claridad,
-            espacios serenos y orientación humana.
+            CMBI organiza sus áreas para que puedas elegir con calma: salud y
+            recuperación, movimiento y acondicionamiento, agua y clases, o relajación
+            y cuidado personal. La experiencia prioriza claridad y orientación humana.
           </p>
         </div>
         <div class="quote-panel reveal">
@@ -112,27 +111,40 @@ const structuredData = {
       <div class="container">
         <div class="section-heading reveal">
           <p class="eyebrow">Áreas integrales de bienestar</p>
-          <h2>Servicios agrupados para encontrar rápido lo que necesitas.</h2>
+          <h2>Servicios agrupados por lo que necesitas hoy.</h2>
           <p>
-            Cada área tiene una explicación breve y una acción directa para iniciar la
-            conversación adecuada por WhatsApp.
+            Agrupamos las áreas para que encuentres rápido la opción que mejor encaja
+            con tu objetivo: salud, movimiento, agua, relajación o cuidado personal.
           </p>
         </div>
 
-        <div class="program-grid">
-          {serviceCards.map((card) => (
-            <article class="program-card reveal" id={card.id}>
-              <div class="card-media">
-                <img src={card.image} alt={card.alt} loading="lazy" />
-              </div>
-              <div class="card-copy">
-                <p class="card-eyebrow">{card.eyebrow}</p>
-                <h3>{card.title}</h3>
-                <p>{card.copy}</p>
-                <a href={card.href}>{card.cta}</a>
-              </div>
-            </article>
-          ))}
+        <div class="services-carousel reveal" data-services-carousel>
+          <div class="carousel-actions" aria-label="Controles de servicios">
+            <button type="button" data-carousel-prev aria-label="Ver servicios anteriores" aria-controls="services-track">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7" /></svg>
+            </button>
+            <button type="button" data-carousel-next aria-label="Ver más servicios" aria-controls="services-track">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7" /></svg>
+            </button>
+          </div>
+
+          <div id="services-track" class="program-grid" data-carousel-track tabindex="0" aria-label="Servicios CMBI">
+            {serviceCards.map((card) => (
+              <article class="program-card" id={card.id}>
+                <div class="card-media">
+                  <img src={card.image} alt={card.alt} loading="lazy" draggable="false" />
+                </div>
+                <div class="card-copy">
+                  <p class="card-eyebrow">{card.eyebrow}</p>
+                  <h3>{card.title}</h3>
+                  <p>{card.copy}</p>
+                  <a class="card-link" href={card.href} aria-label={`Ver página de ${card.eyebrow}`}>
+                    {card.cta}
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -140,8 +152,8 @@ const structuredData = {
     <section class="section benefits-section" id="beneficios">
       <div class="container">
         <div class="section-heading reveal">
-          <p class="eyebrow">Beneficios rápidos</p>
-          <h2>Comunicación breve para decidir sin esfuerzo.</h2>
+          <p class="eyebrow">Beneficios del enfoque integral</p>
+          <h2>Te acompañamos con orientación profesional y una experiencia fácil de entender.</h2>
         </div>
         <div class="benefit-grid">
           {benefitCards.map((item) => (
@@ -158,76 +170,16 @@ const structuredData = {
       <div class="container">
         <div class="section-heading reveal">
           <p class="eyebrow">Instalaciones</p>
-          <h2>Galería visual sin fondos dinámicos ni movimiento brusco.</h2>
-          <p>
-            Las imágenes funcionan como evidencia: recepción, alberca, gym y spa.
-            Los captions aparecen con fade sutil para mantener calma visual.
-          </p>
+          <h2>Conoce nuestras áreas y elige el espacio para tu objetivo.</h2>
         </div>
 
         <div class="gallery-grid">
           {galleryItems.map((item) => (
-            <figure class="gallery-card reveal">
+            <a class="gallery-card reveal" href={item.href} aria-label={`Ver ${item.caption}`}>
               <img src={item.image} alt={item.alt} loading="lazy" />
-              <figcaption>{item.caption}</figcaption>
-            </figure>
+              <span class="gallery-caption">{item.caption}</span>
+            </a>
           ))}
-        </div>
-      </div>
-    </section>
-
-    <section class="section evidence-section" id="testimonios">
-      <div class="container evidence-grid">
-        <div class="evidence-copy reveal">
-          <p class="eyebrow">Testimonios</p>
-          <h2>Señales de confianza para elegir con tranquilidad.</h2>
-          <p>
-            CMBI comunica desde la claridad: acompañamiento cercano, objetivos definidos
-            y una experiencia que evita promesas exageradas.
-          </p>
-        </div>
-
-        <div class="evidence-list">
-          {testimonials.map((item) => (
-            <article class="reveal">
-              <p class="card-eyebrow">{item.label}</p>
-              <p>{item.quote}</p>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <section class="section dashboard-section" id="panel">
-      <div class="container dashboard-grid">
-        <div class="section-heading reveal">
-          <p class="eyebrow">Panel de bienestar</p>
-          <h2>Una vista clara para ordenar servicios, citas y seguimiento.</h2>
-          <p>
-            La experiencia digital puede evolucionar hacia un panel simple para
-            consultar servicios activos, solicitudes por WhatsApp y próximos pasos.
-          </p>
-        </div>
-        <div class="dashboard-panel reveal" aria-label="Vista previa de dashboard CMBI">
-          <div class="dashboard-topline">
-            <span>Vista CMBI</span>
-            <strong>Semana activa</strong>
-          </div>
-          <div class="metric-grid">
-            {dashboardMetrics.map((metric) => (
-              <article>
-                <span>{metric.label}</span>
-                <strong>{metric.value}</strong>
-                <p>{metric.detail}</p>
-              </article>
-            ))}
-          </div>
-          <div class="dashboard-bars" aria-hidden="true">
-            <span style="--bar: 78%"></span>
-            <span style="--bar: 52%"></span>
-            <span style="--bar: 66%"></span>
-            <span style="--bar: 44%"></span>
-          </div>
         </div>
       </div>
     </section>
@@ -243,17 +195,18 @@ const structuredData = {
             agenda fácil de iniciar por conversación.
           </p>
           <p>
-            El mapa ayuda a decidir rápido si la visita es práctica antes de escribir
-            por WhatsApp o elegir un servicio.
+            Consulta la ubicación exacta y el horario general antes de tu visita.
           </p>
           <div class="check-grid">
-            <span>Zona costera</span>
+            <span>Playa Ensenada</span>
             <span>Agenda por WhatsApp</span>
-            <span>Alberca techada</span>
-            <span>Spa + gym</span>
+            <span>Horario general: {siteConfig.hours}</span>
+            <a href={siteConfig.locationHref} target="_blank" rel="noreferrer">Abrir ubicación</a>
           </div>
         </div>
-        <img class="map-image reveal" src={settings.images.map} alt="Mapa de ubicación aproximada de CMBI en la zona costera de Ensenada." loading="lazy" />
+        <a class="map-link reveal" href={siteConfig.locationHref} target="_blank" rel="noreferrer" aria-label="Abrir ubicación de CMBI en Google Maps">
+          <img class="map-image" src={settings.images.map} alt="Referencia visual de la ubicación de CMBI en Playa Ensenada." loading="lazy" />
+        </a>
       </div>
     </section>
 
@@ -270,7 +223,7 @@ const structuredData = {
           <p>{siteConfig.contactBlock.note}</p>
           <div class="contact-actions">
             <a class="button button-primary" href={siteConfig.reserveHref} target="_blank" rel="noreferrer">Agendar cita</a>
-            {servicePages.slice(0, 4).map((service) => (
+            {servicePages.map((service) => (
               <a class="button button-secondary" href={`/servicios/${service.slug}`}>{service.shortTitle}</a>
             ))}
           </div>
@@ -290,7 +243,6 @@ const structuredData = {
       <div class="cookie-actions">
         <button class="button button-primary" type="button" data-cookie-accept>{siteConfig.cookie.primary}</button>
         <button class="button button-secondary" type="button" data-cookie-minimal>{siteConfig.cookie.secondary}</button>
-        <button class="button button-ghost" type="button" data-cookie-preferences>{siteConfig.cookie.tertiary}</button>
       </div>
     </div>
 
@@ -304,7 +256,6 @@ const structuredData = {
     const toggle = document.querySelector("[data-cookie-toggle]");
     const accept = document.querySelector("[data-cookie-accept]");
     const minimal = document.querySelector("[data-cookie-minimal]");
-    const preferences = document.querySelector("[data-cookie-preferences]");
 
     const setConsent = (value) => {
       try {
@@ -336,7 +287,6 @@ const structuredData = {
 
     accept?.addEventListener("click", () => setConsent("accepted"));
     minimal?.addEventListener("click", () => setConsent("necessary"));
-    preferences?.addEventListener("click", () => setConsent("preferences"));
     toggle?.addEventListener("click", () => {
       if (!banner) return;
       banner.hidden = false;
@@ -346,4 +296,125 @@ const structuredData = {
 
   </script>
   <MotionRevealScript />
+  <script>
+    const carousel = document.querySelector("[data-services-carousel]");
+    const track = carousel?.querySelector("[data-carousel-track]");
+    const previous = carousel?.querySelector("[data-carousel-prev]");
+    const next = carousel?.querySelector("[data-carousel-next]");
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    if (carousel && track instanceof HTMLElement) {
+      const cardStep = () => {
+        const card = track.querySelector(".program-card");
+        if (!(card instanceof HTMLElement)) return track.clientWidth * 0.82;
+        const gap = Number.parseFloat(window.getComputedStyle(track).columnGap) || 0;
+        return card.offsetWidth + gap;
+      };
+
+      const moveByCard = (direction) => {
+        track.scrollBy({
+          left: cardStep() * direction,
+          behavior: reducedMotion.matches ? "auto" : "smooth",
+        });
+      };
+
+      previous?.addEventListener("click", () => moveByCard(-1));
+      next?.addEventListener("click", () => moveByCard(1));
+      track.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+          event.preventDefault();
+          moveByCard(event.key === "ArrowLeft" ? -1 : 1);
+        }
+      });
+
+      let edgeSpeed = 0;
+      let animationFrame = 0;
+      let dragging = false;
+      let dragged = false;
+      let dragStartX = 0;
+      let dragStartScroll = 0;
+
+      const animateEdgeScroll = () => {
+        if (edgeSpeed !== 0 && !dragging && !reducedMotion.matches) {
+          track.scrollLeft += edgeSpeed;
+          animationFrame = requestAnimationFrame(animateEdgeScroll);
+        } else {
+          animationFrame = 0;
+        }
+      };
+
+      const setEdgeSpeed = (event) => {
+        if (dragging || reducedMotion.matches || event.pointerType === "touch") return;
+        const bounds = track.getBoundingClientRect();
+        const position = (event.clientX - bounds.left) / bounds.width;
+        const edgeZone = 0.22;
+
+        if (position < edgeZone) {
+          edgeSpeed = -Math.max(2, ((edgeZone - position) / edgeZone) * 12);
+        } else if (position > 1 - edgeZone) {
+          edgeSpeed = Math.max(2, ((position - (1 - edgeZone)) / edgeZone) * 12);
+        } else {
+          edgeSpeed = 0;
+        }
+
+        if (edgeSpeed !== 0 && animationFrame === 0) {
+          animationFrame = requestAnimationFrame(animateEdgeScroll);
+        }
+      };
+
+      track.addEventListener("pointermove", (event) => {
+        if (dragging) {
+          if (Math.abs(event.clientX - dragStartX) > 6) dragged = true;
+          track.scrollLeft = dragStartScroll - (event.clientX - dragStartX);
+          return;
+        }
+        setEdgeSpeed(event);
+      });
+
+      track.addEventListener("mousemove", (event) => {
+        if (!dragging) setEdgeSpeed(event);
+      });
+
+      track.addEventListener("pointerleave", () => {
+        edgeSpeed = 0;
+        dragging = false;
+        track.removeAttribute("data-dragging");
+      });
+
+      track.addEventListener("pointerdown", (event) => {
+        if (event.pointerType === "touch" || event.button !== 0) return;
+        dragging = true;
+        dragged = false;
+        edgeSpeed = 0;
+        dragStartX = event.clientX;
+        dragStartScroll = track.scrollLeft;
+        track.setAttribute("data-dragging", "true");
+        track.setPointerCapture(event.pointerId);
+      });
+
+      track.addEventListener("pointerup", (event) => {
+        if (!dragging) return;
+        dragging = false;
+        track.removeAttribute("data-dragging");
+        track.releasePointerCapture(event.pointerId);
+      });
+
+      track.addEventListener("pointercancel", () => {
+        dragging = false;
+        track.removeAttribute("data-dragging");
+      });
+
+      track.addEventListener("click", (event) => {
+        if (!dragged) return;
+        event.preventDefault();
+        dragged = false;
+      }, { capture: true });
+
+      track.addEventListener("wheel", (event) => {
+        if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return;
+        event.preventDefault();
+        track.scrollLeft += event.deltaY;
+      }, { passive: false });
+    }
+  </script>
 </Layout>
